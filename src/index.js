@@ -32,10 +32,25 @@ const taskForm = document.getElementById('task_form');
     //   name: 'Default Project',
     //   todos: [],
     // };
+
+    const rendertask = (selectedProjectId1) => {
+        taskContainer.innerHTML='1234';        
+        const selectedProject = projects.find(project => project.id === selectedProjectId1);
+        console.log(selectedProject);
+        selectedProject.todos.forEach(task => {
+            const taskElement = document.createElement('li');
+            taskElement.dataset.taskId = task.id;
+            taskElement.innerText = task.name;
+            taskContainer.appendChild(taskElement);
+        });
+      };         
+
+
     function task(project){
-        add_task.style.visibility = 'visible';
+        add_task.style.visibility = 'visible';        
         const selectedProjectId = project.id;
-        return selectedProjectId;
+        rendertask(selectedProjectId);
+        return selectedProjectId;        
     }
 
     const renderProjects = () => {
@@ -49,23 +64,13 @@ const taskForm = document.getElementById('task_form');
           //  projectElement.classList.add('active-project');
           //}
           projectsContainer.appendChild(projectElement);
-        })
-      }
-      const renderProjects = () => {
-        taskContainer.innerHTML='';
-        const selectedProject = projects.find(project => project.id === selectedProjectId1);
-        selectedProject.todos.forEach(task => {
-            const taskElement = document.createElement('li');
-            taskElement.dataset.taskId = task.id;
-            taskElement.innerText = task.name;
-            taskContainer.appendChild(taskElement);
-        })
-      }
-      
+        });
+      };
+
+     
 
     const display = () => {
-        renderProjects();
-        rendertask();
+        renderProjects();        
     }
 
 
@@ -113,9 +118,8 @@ taskForm.addEventListener('submit', e => {
     newTodoInputDesc.value= null;
     newTodoInputDate.value= null;
     newTodoInputNote.value= null;
-    task_form_body.style.visibility = 'hidden';
-   
+    task_form_body.style.visibility = 'hidden';   
     
-    //display(); 
+    rendertask(selectedProjectId1);
   });
 
