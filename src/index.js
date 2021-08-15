@@ -3,6 +3,8 @@ import { createProject, createTodo } from './create.js';
 
 let projects = [];
 var selectedProjectId1=1;
+var selectedTaskId1=1;
+
 const projectsContainer = document.querySelector('[data-projects]');
 const taskContainer = document.querySelector('[data-to-do]');
 
@@ -41,11 +43,15 @@ const taskForm = document.getElementById('task_form');
             const taskElement = document.createElement('li');
             taskElement.dataset.taskId = task.id;
             taskElement.innerText = task.name;
+            taskElement.onclick = function(){selectedTaskId1 = description(task)};
             taskContainer.appendChild(taskElement);
         });
       };         
 
+    function description(task) {
 
+    }
+    
     function task(project){
         add_task.style.visibility = 'visible';        
         const selectedProjectId = project.id;
@@ -118,7 +124,7 @@ taskForm.addEventListener('submit', e => {
     newTodoInputDesc.value= null;
     newTodoInputDate.value= null;
     newTodoInputNote.value= null;
-    task_form_body.style.visibility = 'hidden';   
+    task_form_body.style.visibility = 'hidden';  
     
     rendertask(selectedProjectId1);
   });
