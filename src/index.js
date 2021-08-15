@@ -7,6 +7,7 @@ var selectedTaskId1=1;
 
 const projectsContainer = document.querySelector('[data-projects]');
 const taskContainer = document.querySelector('[data-to-do]');
+const descriptionContainer = document.querySelector('[data-description]');
 
 
 const project_form_body = document.getElementById('project_form_body');
@@ -33,30 +34,40 @@ const taskForm = document.getElementById('task_form');
     //   id: Date.now().toString(),
     //   name: 'Default Project',
     //   todos: [],
-    // };
+     const renderdescription = (selectedTaskId1,selectedProject) => {
+        descriptionContainer.innerHTML='';
+        const selectedTask = selectedProject.todos.find(task => task.id === selectedTaskId1);
+        descriptionContainer.innerHTML=` 'Name:' ${selectedTask.name} <br> 'Description:'${selectedTask.desc}
+        <br> 'Priority:' ${selectedTask.prior} <br> 'Date:' ${selectedTask.date} <br>'note:' ${selectedTask.note}
+        `;
+
+    };  
 
     const rendertask = (selectedProjectId1) => {
-        taskContainer.innerHTML='1234';        
+        taskContainer.innerHTML='';
+        descriptionContainer.innerHTML='';    
         const selectedProject = projects.find(project => project.id === selectedProjectId1);
         console.log(selectedProject);
         selectedProject.todos.forEach(task => {
             const taskElement = document.createElement('li');
             taskElement.dataset.taskId = task.id;
             taskElement.innerText = task.name;
-            taskElement.onclick = function(){selectedTaskId1 = description(task)};
+            taskElement.onclick = function(){selectedTaskId1 = description(task,selectedProject)};
             taskContainer.appendChild(taskElement);
         });
       };         
 
-    function description(task) {
-
+    function description(task,selectedProject) {
+        const selectedTaskId1 = task.id;
+        renderdescription(selectedTaskId1,selectedProject);
+        return selectedTaskId1;
     }
-    
+
     function task(project){
         add_task.style.visibility = 'visible';        
-        const selectedProjectId = project.id;
-        rendertask(selectedProjectId);
-        return selectedProjectId;        
+        const selectedProjectId1 = project.id;
+        rendertask(selectedProjectId1);
+        return selectedProjectId1;
     }
 
     const renderProjects = () => {
