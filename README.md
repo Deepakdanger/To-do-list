@@ -9,8 +9,7 @@
 ## Live Demo
 
 Click on the link below for accessing the deployed website.
-### [To Do List App]()</p>
-
+### [To Do List App](https://deepakdanger.github.io/To-do-list/)
 
 ## Getting Started
 
