@@ -29,25 +29,37 @@ const addTask = document.getElementById('add_task');
 const projectForm = document.getElementById('project_form');
 const taskForm = document.getElementById('task_form');
 
+const deleteTask = document.getElementById('button_delete');
+const updateTask = document.getElementById('button_update');
 
-    // {
-    //   id: Date.now().toString(),
-    //   name: 'Default Project',
-    //   todos: [],
+
      const renderdescription = (selectedTaskId1,selectedProject) => {
         descriptionContainer.innerHTML='';
         const selectedTask = selectedProject.todos.find(task => task.id === selectedTaskId1);
-        descriptionContainer.innerHTML=` 'Name:' ${selectedTask.name} <br> 'Description:'${selectedTask.desc}
-        <br> 'Priority:' ${selectedTask.prior} <br> 'Date:' ${selectedTask.date} <br>'note:' ${selectedTask.note}
-        `;
+        descriptionContainer.innerHTML = `Name:- ${selectedTask.name} <br> Description:-${selectedTask.desc}
+        <br> Priority:- ${selectedTask.prior} <br> Date:- ${selectedTask.date} <br> note:- ${selectedTask.note} <br>
+         `;
+         deleteTask.style.visibility = 'visible';  
+         updateTask.style.visibility = 'visible';  
+         console.log(selectedProject.todos);
 
-    };  
+    }; 
+
+   
+
+    function description(task,selectedProject) {
+        const selectedTaskId1 = task.id;
+        renderdescription(selectedTaskId1,selectedProject);
+        return selectedTaskId1;
+    }
 
     const rendertask = (selectedProjectId1) => {
         taskContainer.innerHTML='';
-        descriptionContainer.innerHTML='';    
+        descriptionContainer.innerHTML=''; 
+        deleteTask.style.visibility = 'hidden';
+        updateTask.style.visibility = 'hidden';
         const selectedProject = projects.find(project => project.id === selectedProjectId1);
-        console.log(selectedProject);
+        taskContainer.innerHTML='Project Name:-'+selectedProject.name;
         selectedProject.todos.forEach(task => {
             const taskElement = document.createElement('li');
             taskElement.dataset.taskId = task.id;
@@ -55,13 +67,9 @@ const taskForm = document.getElementById('task_form');
             taskElement.onclick = function(){selectedTaskId1 = description(task,selectedProject)};
             taskContainer.appendChild(taskElement);
         });
-      };         
-
-    function description(task,selectedProject) {
-        const selectedTaskId1 = task.id;
-        renderdescription(selectedTaskId1,selectedProject);
-        return selectedTaskId1;
-    }
+      };
+      
+      
 
     function task(project){
         add_task.style.visibility = 'visible';        
@@ -72,14 +80,14 @@ const taskForm = document.getElementById('task_form');
 
     const renderProjects = () => {
         projectsContainer.innerHTML='';
+        descriptionContainer.innerHTML='';
+        deleteTask.style.visibility = 'hidden';  
+        updateTask.style.visibility = 'hidden';
         projects.forEach(project => {
           const projectElement = document.createElement('li');
           projectElement.dataset.projectId = project.id;
           projectElement.innerText = project.name;
           projectElement.onclick = function(){selectedProjectId1 = task(project)};
-          //if (project.id === selectedProjectId) {
-          //  projectElement.classList.add('active-project');
-          //}
           projectsContainer.appendChild(projectElement);
         });
       };
@@ -88,14 +96,7 @@ const taskForm = document.getElementById('task_form');
 
     const display = () => {
         renderProjects();        
-    }
-
-
-
-    // const saveAndDisplay = () => {
-    //     //save();
-    //     display();
-    // };
+    };
 
     addProject.addEventListener('click', () => {
         project_form_body.style.visibility = 'visible';
@@ -112,13 +113,14 @@ projectForm.addEventListener('submit', e => {
     if (projectName == null || projectName === '') return;
     const project = createProject(projectName);
     newProjectInput.value = null;
-    projects.push(project);
-    
+    projects.push(project);    
     display();
 });
 
 taskForm.addEventListener('submit', e => {
     e.preventDefault();
+    addTask.style.visibility = 'visible'; 
+    addProject.style.visibility = 'visible'; 
     const todoName = newTodoInputTitle.value;
     const todoDesc = newTodoInputDesc.value;
     const todoPrior = newTodoInputPrior.value;
@@ -134,9 +136,38 @@ taskForm.addEventListener('submit', e => {
     newTodoInputTitle.value= null;
     newTodoInputDesc.value= null;
     newTodoInputDate.value= null;
+    newTodoInputTime.value= null;
     newTodoInputNote.value= null;
-    task_form_body.style.visibility = 'hidden';  
-    
+    task_form_body.style.visibility = 'hidden';    
     rendertask(selectedProjectId1);
   });
 
+  deleteTask.addEventListener('click', () => {
+    const selectedProject = projects.find(project => project.id === selectedProjectId1);
+    const selectedTask = selectedProject.todos.find(task => task.id === selectedTaskId1);
+    var Index = selectedProject.todos.indexOf(selectedTask);        
+    selectedProject.todos.splice(Index, 1);
+    rendertask(selectedProjectId1);
+});
+
+  updateTask.addEventListener('click', () => {
+    const selectedProject = projects.find(project => project.id === selectedProjectId1);
+    const selectedTask = selectedProject.todos.find(task => task.id === selectedTaskId1);
+    descriptionContainer.innerHTML='';
+    deleteTask.style.visibility = 'hidden';  
+    updateTask.style.visibility = 'hidden';
+
+    task_form_body.style.visibility = 'visible';
+     newTodoInputTitle.value = selectedTask.name;
+     newTodoInputDesc.value = selectedTask.desc;
+     newTodoInputPrior.value = selectedTask.prior;
+     newTodoInputDate.value = selectedTask.date;
+     newTodoInputTime.value = selectedTask.time;
+     newTodoInputNote.value = selectedTask.note;
+    console.log(newTodoInputTitle);
+
+    var Index = selectedProject.todos.indexOf(selectedTask);
+    selectedProject.todos.splice(Index, 1);
+    addTask.style.visibility = 'hidden'; 
+    addProject.style.visibility = 'hidden'; 
+});

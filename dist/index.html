@@ -5,14 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./assets/css/main.scss">
+    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 	
 	<title>TO-DO-LIST</title>
 </head>
 <body>
-    <nav class="nav-bar"></nav>
-    <div class="to-do-list_div">
-        <div class="projects">
+    <nav class="nav-bar">
+        <h2 class="titleee">TO-DO-PROJECT</h2>
+    </nav>
+    <div class="to-do-list_div d-flex">
+        <div class="projects col-3">
 			<h2 class="project_title">Projects</h2>
 			<ul class="project_list" data-projects></ul>
 			<button class="btn btn-primary" id="add_project" >ADD NEW PROJECT</button>
@@ -28,7 +30,7 @@
 
 		</div>
 
-        <div class="projct_to_do">
+        <div class="projct_to_do col-5">
             <h2 class="to_do_title">TO-DO</h2>
             <ul class="to_do_list" data-to-do></ul>
             <button class="btn btn-primary" id="add_task" style="visibility: hidden;" >ADD NEW TASK </button>
@@ -69,11 +71,13 @@
 
         </div>
 
-        <div class="description">
+        <div class="description col-4">
             <h2 class="task_title">Description</h2>
             <div class="description_task" data-description>
                     
             </div>            
+            <button id="button_update" style="visibility: hidden;"> Update & Edit </button>  
+            <button id="button_delete" style="visibility: hidden;"> Delete </button>    
         </div>
     </div>
 
