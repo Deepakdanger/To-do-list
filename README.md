@@ -1,5 +1,5 @@
 # TO DO List project
-  A todo list app built using Web APIs and webpack to bundle modules.Here one can create project ,task and set the timing of it along with the description and notes.
+  A to-do list app built using Web APIs and webpack to bundle modules. Here one can create a project, task and set the timing of it along with the description and notes.
   
 ## Built With
 - Javascript
