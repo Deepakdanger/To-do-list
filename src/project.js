@@ -18,6 +18,9 @@ const addTask = document.getElementById('add_task');
 const deleteTask = document.getElementById('button_delete');
 const updateTask = document.getElementById('button_update');
 
+deleteTask.classList.add('invis');
+updateTask.classList.add('invis');
+
 const LOCAL_STORAGE_ALL_PROJECTS = 'projects';
 const LOCAL_STORAGE_SELECTED_PROJECT = 'selectedProjectId1';
 const LOCAL_STORAGE_SELECTED_TASK = 'selectedTaskId1';
@@ -37,8 +40,10 @@ const renderdescription = (selectedProject) => {
   descriptionContainer.innerHTML = `Name:- ${selectedTask.name} <br> Description:-${selectedTask.desc}
           <br> Priority:- ${selectedTask.prior} <br> Date:- ${selectedTask.date} <br> note:- ${selectedTask.note} <br>
            `;
-  deleteTask.style.visibility = 'visible';
-  updateTask.style.visibility = 'visible';
+  deleteTask.classList.remove('invis');
+  deleteTask.classList.add('vis');
+  updateTask.classList.remove('invis');
+  updateTask.classList.add('vis');
 };
 
 const description = (task, selectedProject) => {
@@ -51,8 +56,10 @@ const description = (task, selectedProject) => {
 const rendertask = () => {
   taskContainer.innerHTML = '';
   descriptionContainer.innerHTML = '';
-  deleteTask.style.visibility = 'hidden';
-  updateTask.style.visibility = 'hidden';
+  deleteTask.classList.remove('vis');
+  deleteTask.classList.add('invis');
+  updateTask.classList.remove('vis');
+  updateTask.classList.add('invis');
   const selectedProjectId1 = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT);
   const selectedProject = projects.find((project) => project.id === selectedProjectId1);
   taskContainer.innerHTML = `Project Name:-${selectedProject.name}`;
@@ -66,7 +73,8 @@ const rendertask = () => {
 };
 
 const task = (project) => {
-  addTask.style.visibility = 'visible';
+  addTask.classList.remove('invis');
+  addTask.classList.add('vis');
   const selectedProjectId1 = project.id;
   localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT, selectedProjectId1);
   rendertask();
@@ -75,8 +83,10 @@ const task = (project) => {
 const renderProjects = () => {
   projectsContainer.innerHTML = '';
   descriptionContainer.innerHTML = '';
-  deleteTask.style.visibility = 'hidden';
-  updateTask.style.visibility = 'hidden';
+  deleteTask.classList.remove('vis');
+  deleteTask.classList.add('invis');
+  updateTask.classList.remove('vis');
+  updateTask.classList.add('invis');
   projects.forEach((project) => {
     const projectElement = document.createElement('li');
     projectElement.dataset.projectId = project.id;
@@ -112,10 +122,13 @@ updateTask.addEventListener('click', () => {
   const selectedTaskId1 = localStorage.getItem(LOCAL_STORAGE_SELECTED_TASK);
   const selectedTask = selectedProject.todos.find((task) => task.id === selectedTaskId1);
   descriptionContainer.innerHTML = '';
-  deleteTask.style.visibility = 'hidden';
-  updateTask.style.visibility = 'hidden';
+  deleteTask.classList.remove('vis');
+  deleteTask.classList.add('invis');
+  updateTask.classList.remove('vis');
+  updateTask.classList.add('invis');
 
-  taskFormBody.style.visibility = 'visible';
+  taskFormBody.classList.remove('invis');
+  taskFormBody.classList.add('vis');
   newTodoInputTitle.value = selectedTask.name;
   newTodoInputDesc.value = selectedTask.desc;
   newTodoInputPrior.value = selectedTask.prior;
@@ -124,8 +137,10 @@ updateTask.addEventListener('click', () => {
   newTodoInputNote.value = selectedTask.note;
   const Index = selectedProject.todos.indexOf(selectedTask);
   selectedProject.todos.splice(Index, 1);
-  addTask.style.visibility = 'hidden';
-  addProject.style.visibility = 'hidden';
+  addTask.classList.remove('vis');
+  addTask.classList.add('invis');
+  addProject.classList.remove('vis');
+  addProject.classList.add('invis');
   save();
 });
 

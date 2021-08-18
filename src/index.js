@@ -21,17 +21,25 @@ const addTask = document.getElementById('add_task');
 const projectForm = document.getElementById('project_form');
 const taskForm = document.getElementById('task_form');
 
+projectFormBody.classList.add('invis');
+taskFormBody.classList.add('invis');
+
+addTask.classList.add('invis');
+
 addProject.addEventListener('click', () => {
-  projectFormBody.style.visibility = 'visible';
+  projectFormBody.classList.remove('invis');
+  projectFormBody.classList.add('vis');
 });
 
 addTask.addEventListener('click', () => {
-  taskFormBody.style.visibility = 'visible';
+  taskFormBody.classList.remove('invis');
+  taskFormBody.classList.add('vis');
 });
 
 projectForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  projectFormBody.style.visibility = 'hidden';
+  projectFormBody.classList.remove('vis');
+  projectFormBody.classList.add('invis');
   const projectName = newProjectInput.value;
   if (projectName == null || projectName === '') return;
   const project = createProject(projectName);
@@ -42,8 +50,12 @@ projectForm.addEventListener('submit', (e) => {
 
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  addTask.style.visibility = 'visible';
-  addProject.style.visibility = 'visible';
+
+  addTask.classList.remove('invis');
+  addTask.classList.add('vis');
+  addProject.classList.remove('invis');
+  addProject.classList.add('vis');
+
   const todoName = newTodoInputTitle.value;
   const todoDesc = newTodoInputDesc.value;
   const todoPrior = newTodoInputPrior.value;
@@ -61,7 +73,8 @@ taskForm.addEventListener('submit', (e) => {
   newTodoInputDate.value = null;
   newTodoInputTime.value = null;
   newTodoInputNote.value = null;
-  taskFormBody.style.visibility = 'hidden';
+  taskFormBody.classList.remove('vis');
+  taskFormBody.classList.add('invis');
   save();
   rendertask(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT));
 });

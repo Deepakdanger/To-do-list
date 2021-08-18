@@ -10,6 +10,14 @@
   color: blueviolet;
 }
 
+.invis {
+  visibility: hidden;
+}
+
+.vis {
+  visibility: visible;
+}
+
 ul li:hover{
   font-size: large;
   cursor: pointer;
