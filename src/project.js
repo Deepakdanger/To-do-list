@@ -65,12 +65,12 @@ const rendertask = () => {
   });
 };
 
-function task(project) {
+const task = (project) => {
   addTask.style.visibility = 'visible';
   const selectedProjectId1 = project.id;
   localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT, selectedProjectId1);
   rendertask();
-}
+};
 
 const renderProjects = () => {
   projectsContainer.innerHTML = '';
