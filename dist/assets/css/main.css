@@ -1,0 +1,24 @@
+.project_list li{
+  color: rgb(233, 90, 7) !important;
+}
+
+.to_do_list li{
+  color: rgb(38, 214, 38);
+}
+
+.description_task {
+  color: blueviolet;
+}
+
+.invis {
+  visibility: hidden;
+}
+
+.vis {
+  visibility: visible;
+}
+
+ul li:hover{
+  font-size: large;
+  cursor: pointer;
+}

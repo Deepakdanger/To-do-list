@@ -4,11 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./assets/css/main.scss">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
 	
 	<title>TO-DO-LIST</title>
 </head>
 <body>
+    <nav class="nav-bar">
+        <h2 class="titleee">TO-DO-PROJECT</h2>
+    </nav>
+    <div class="to-do-list_div d-flex">
+        <div class="projects col-3">
+			<h2 id="project_title">Projects</h2>
+			<ul class="project_list" data-projects></ul>
+			<button class="btn btn-primary" id="add_project" >ADD NEW PROJECT</button>
+            
+            <div class="project_form_body1" id="project_form_body">
+                <form id="project_form">
+                        <label for="ProjectTItle">Title</label>
+                        <input type="text" class="projectTitle" id="projectTitleId" name="projectTitleId" placeholder="Enter the title of your project" data-new-project-input required>
+                    
+                        <button type="submit" class="btn btn-primary" id="btn-project-submit" >Submit</button>
+                </form>
+            </div>
+
+		</div>
+
+        <div class="projct_to_do col-5">
+            <h2 class="to_do_title">TO-DO</h2>
+            <ul class="to_do_list" data-to-do></ul>
+            <button class="btn btn-primary" id="add_task" >ADD NEW TASK </button>
+
+            <div class="task_form_body1" id="task_form_body" >
+                <form id="task_form" data-new-todo-form>
+                    <div class="form-group">
+                        <label for="inputToDoTitle">Title</label>
+                        <input type="text" class="form-control" id="inputToDoTitle" placeholder="Enter title..." data-new-todo-title-input required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputToDoDesc">Description</label>
+                        <input type="text" class="form-control" id="inputToDoDesc" placeholder="Enter description..."data-new-todo-desc-input required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputToDoPrior">Priority</label>
+                        <select class="form-control" id="inputToDoPrior" data-new-todo-prior-input>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="datetime">Due Date</label>
+                        <div id="datetime" class="form-control">
+                        <input type="date"  name="date" id="inputToDODate" data-new-todo-date-input required>
+                        <input type="time" name="time" id="inputToDOTime" data-new-todo-time-input required>	
+                        </div>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="inputToDONote">Notes</label>
+                        <textarea class="form-control" id="inputToDONote" data-new-todo-note-input required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btn-todo-submit">Submit</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="description col-4">
+            <h2 class="task_title">Description</h2>
+            <div class="description_task" data-description>
+                    
+            </div>            
+            <button id="button_update" > Update & Edit </button>  
+            <button id="button_delete" > Delete </button>    
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>
