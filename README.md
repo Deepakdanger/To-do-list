@@ -40,7 +40,21 @@ npm install
 npm run build
 ```
 5. You can now open the `index.html` file in `dist folder` in any browser.
-   
+
+### Testing
+ First to install Jest 
+ ```sh
+ npm install --save-dev jest
+```
+Include this in scripts of package.json.
+ ```sh
+"test": "jest"
+```
+Run the test.
+ ```sh
+ npm run test
+ ```
+
 ## Author
 
 ![Deepak Kumar's GitHub stats](https://github-readme-stats.vercel.app/api?username=Deepakdanger&count_private=true&theme=dark&show_icons=true)
