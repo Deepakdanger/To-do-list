@@ -7,6 +7,10 @@ describe('Create the project', () => {
     expect(project.name).toEqual('sleep');
   });
 
+  test('project.name should be equal to name of the project ', () => {
+    expect(project.name === 'sleepy').toBeFalsy();
+  });
+
   test('it will return project task type ', () => {
     const project = createProject('sleep');
     expect(typeof project.todos).toEqual('object');
@@ -18,6 +22,10 @@ describe('Create a todo', () => {
 
   test('return todo name', () => {
     expect(todo.name).toEqual('sleeping');
+  });
+
+  test('task.name should be equal to name of the task ', () => {
+    expect(todo.name === 'sleepy').toBeFalsy();
   });
 
   test('return todo description', () => {

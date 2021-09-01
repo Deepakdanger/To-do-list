@@ -42,10 +42,7 @@ npm run build
 5. You can now open the `index.html` file in `dist folder` in any browser.
 
 ### Testing
- First to install Jest 
- ```sh
- npm install --save-dev jest
-```
+
 Include this in scripts of package.json.
  ```sh
 "test": "jest"

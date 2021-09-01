@@ -1,7 +1,11 @@
 import { createProject, createTodo } from './create';
 import {
-  rendertask, renderProjects, projects, display, save, LOCAL_STORAGE_SELECTED_PROJECT,
+  rendertask, renderProjects, projects, display, save,
+  LOCAL_STORAGE_SELECTED_PROJECT,
+  LOCAL_STORAGE_SELECTED_TASK,
 } from './project';
+
+const descriptionContainer = document.querySelector('[data-description]');
 
 const projectFormBody = document.getElementById('project_form_body');
 const taskFormBody = document.getElementById('task_form_body');
@@ -25,6 +29,12 @@ projectFormBody.classList.add('invis');
 taskFormBody.classList.add('invis');
 
 addTask.classList.add('invis');
+
+const deleteTask = document.getElementById('button_delete');
+const updateTask = document.getElementById('button_update');
+
+deleteTask.classList.add('invis');
+updateTask.classList.add('invis');
 
 addProject.addEventListener('click', () => {
   projectFormBody.classList.remove('invis');
@@ -77,6 +87,45 @@ taskForm.addEventListener('submit', (e) => {
   taskFormBody.classList.add('invis');
   save();
   rendertask(localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT));
+});
+
+deleteTask.addEventListener('click', () => {
+  const selectedProjectId1 = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT);
+  const selectedProject = projects.find((project) => project.id === selectedProjectId1);
+  const selectedTaskId1 = localStorage.getItem(LOCAL_STORAGE_SELECTED_TASK);
+  const selectedTask = selectedProject.todos.find((task) => task.id === selectedTaskId1);
+  const Index = selectedProject.todos.indexOf(selectedTask);
+  selectedProject.todos.splice(Index, 1);
+  save();
+  rendertask();
+});
+
+updateTask.addEventListener('click', () => {
+  const selectedProjectId1 = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT);
+  const selectedProject = projects.find((project) => project.id === selectedProjectId1);
+  const selectedTaskId1 = localStorage.getItem(LOCAL_STORAGE_SELECTED_TASK);
+  const selectedTask = selectedProject.todos.find((task) => task.id === selectedTaskId1);
+  descriptionContainer.innerHTML = '';
+  deleteTask.classList.remove('vis');
+  deleteTask.classList.add('invis');
+  updateTask.classList.remove('vis');
+  updateTask.classList.add('invis');
+
+  taskFormBody.classList.remove('invis');
+  taskFormBody.classList.add('vis');
+  newTodoInputTitle.value = selectedTask.name;
+  newTodoInputDesc.value = selectedTask.desc;
+  newTodoInputPrior.value = selectedTask.prior;
+  newTodoInputDate.value = selectedTask.date;
+  newTodoInputTime.value = selectedTask.time;
+  newTodoInputNote.value = selectedTask.note;
+  const Index = selectedProject.todos.indexOf(selectedTask);
+  selectedProject.todos.splice(Index, 1);
+  addTask.classList.remove('vis');
+  addTask.classList.add('invis');
+  addProject.classList.remove('vis');
+  addProject.classList.add('invis');
+  save();
 });
 
 renderProjects();
